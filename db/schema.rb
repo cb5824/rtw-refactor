@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_161537) do
+ActiveRecord::Schema.define(version: 2021_10_04_041348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2021_10_02_161537) do
     t.boolean "populated", default: false
     t.boolean "cancelled", default: false
     t.bigint "request_id"
-    t.bigint "week_id"
     t.text "start_time", default: ""
     t.text "end_time", default: ""
     t.integer "cp1", default: 1
@@ -54,8 +53,8 @@ ActiveRecord::Schema.define(version: 2021_10_02_161537) do
     t.string "approval_group_2", default: "pending"
     t.string "approval_group_3", default: "pending"
     t.string "approval_group_4", default: "pending"
+    t.integer "num_in_week", null: false
     t.index ["request_id"], name: "index_days_on_request_id"
-    t.index ["week_id"], name: "index_days_on_week_id"
   end
 
   create_table "requests", force: :cascade do |t|

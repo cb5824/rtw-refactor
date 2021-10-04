@@ -3,5 +3,6 @@ FactoryBot.define do
     user
     week
     year {Time.now.year}
+
   end
 end

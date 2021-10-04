@@ -24,6 +24,9 @@ user.save!
   FactoryBot.create(:user)
 end
 
-50.times do
-   FactoryBot.create(:request, week: thisweek)
+40.times do
+   request = FactoryBot.create(:request, week: thisweek)
+   [0, 1, 2, 3, 4, 5, 6].each do |i|
+     FactoryBot.create(:day, request: request, num_in_week: i)
+   end
 end

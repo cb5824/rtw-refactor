@@ -1,0 +1,7 @@
+
+<!-- temporary while I decide on display style -->
+<ul>
+  <% @requests.each do |r| %>
+    <li>year = <%= r.year %>, week = <%= r.week.weeknum %>, contractor = <%= r.contractor %></li>
+  <% end %>
+</ul>
