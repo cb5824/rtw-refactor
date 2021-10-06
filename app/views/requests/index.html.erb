@@ -1,7 +1,74 @@
 
 <!-- temporary while I decide on display style -->
-<ul>
-  <% @requests.each do |r| %>
-    <li>year = <%= r.year %>, week = <%= r.week.weeknum %>, contractor = <%= r.contractor %></li>
-  <% end %>
-</ul>
+<div class="daytab active">Week</div>
+<div class="daytab inactive">Mon</div>
+<div class="daytab inactive">Tue</div>
+<div class="daytab inactive">Wed</div>
+<div class="daytab inactive">Thur</div>
+<div class="daytab inactive">Fri</div>
+<div class="daytab inactive">Sat</div>
+<div class="daytab inactive">Sun</div>
+
+
+<table class="requests_table">
+  <thead>
+    <tr>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Approval Status</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Line #</div></th>
+      <th rowspan="2" class="wmedium"><div>Project <br>WD #</div></th>
+      <th rowspan="2"  class="wmedium"><div>Contractor</div></th>
+      <th colspan="7" class="topheader"><div>Location</th>
+      <th rowspan="2"><div class="wlarge">Description of Work</th>
+      <th colspan="7"><div>Support Allocation</th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
+      <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
+      <th colspan="5"><div>Protection</th>
+      <th rowspan="2" class="wmedium"><div>Associated SSWPs</th>
+      <th rowspan="2" class="wmedium"><div>Associated CNs</th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">RWP Training Complete?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">OCS/25kV De-Energize?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Disturb Track?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM On Track?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM Off Track?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Disable/Affect Crossings?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Utility Locates Required?</div></th>
+      <th rowspan="2" class="rotated trflex"><div class="tallheader">Traffic Control Required?</div></th>
+      <th colspan="3"><div>Submittal Details</th>
+    </tr>
+    <tr>
+      <th>Mile Post</th>
+      <th>Control Point</th>
+      <th class="rotated"><div class="smallheader wverysmall">MT1</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">MT2</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
+      <th class="wsmall preserve-lines">Mon</th>
+      <th class="wsmall preserve-lines">Tue</th>
+      <th class="wsmall preserve-lines">Wed</th>
+      <th class="wsmall preserve-lines">Thu</th>
+      <th class="wsmall preserve-lines">Fri</th>
+      <th class="wsmall preserve-lines">Sat</th>
+      <th class="wsmall preserve-lines">Sun</th>
+      <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">T&T</div></th>
+      <th class="rotated"><div class="smallheader wverysmall">Inacc Trk</div></th>
+      <th class="wmedium">Date Submitted</th>
+      <th class="wmedium">Last Edited</th>
+      <th class="wmedium">Submitted By</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% linecount = 1 %>
+      <% @requests.each do |r| %>
+        <tr>
+          <td> <%= r.status? %></td>
+          <td><%= linecount %></td>
+          <% linecount += 1 %>
+        </tr>
+      <% end %>
+  </tbody>
+
+</table>
