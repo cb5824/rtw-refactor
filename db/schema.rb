@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2021_10_08_174502) do
     t.boolean "populated", default: false
     t.boolean "cancelled", default: false
     t.bigint "request_id"
-    t.text "start_time", default: ""
-    t.text "end_time", default: ""
+    t.text "start_time", default: "01:00"
+    t.text "end_time", default: "02:00"
     t.integer "cp1", default: 1
     t.integer "cp2", default: 1
     t.decimal "mp1", default: "0.0"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_174502) do
     t.bigint "user_id"
     t.integer "year", null: false
     t.bigint "week_id"
-    t.string "contractor"
+    t.string "contractor", null: false
     t.string "status", default: "pending"
     t.string "project", null: false
     t.string "work_directive", null: false

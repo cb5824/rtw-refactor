@@ -67,5 +67,95 @@ feature 'requests' do
 
   end
 
+  scenario "Can accurately parse a weeks worth of MT1 to a true/false value" do
+    expect(request1.weekly_mt1).to eq(false)
+    request1.days[3].mt1 = true
+    expect(request1.weekly_mt1).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of MT2 to a true/false value" do
+    expect(request1.weekly_mt2).to eq(false)
+    request1.days[3].mt2 = true
+    expect(request1.weekly_mt2).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of MT3 to a true/false value" do
+    expect(request1.weekly_mt3).to eq(false)
+    request1.days[3].mt3 = true
+    expect(request1.weekly_mt3).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of MT4 to a true/false value" do
+    expect(request1.weekly_mr4).to eq(false)
+    request1.days[3].mr4 = true
+    expect(request1.weekly_mr4).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of the Other field to a true/false value" do
+    expect(request1.weekly_other).to eq(false)
+    request1.days[3].other = true
+    expect(request1.weekly_other).to eq(true)
+  end
+
+  scenario "Can accurately parse each day's worker allocation into a string" do
+    expect(request1.workers_day(0)).to eq("-")
+    expect(request1.workers_day(1)).to eq("-")
+    expect(request1.workers_day(2)).to eq("-")
+    expect(request1.workers_day(3)).to eq("-")
+    expect(request1.workers_day(4)).to eq("-")
+    expect(request1.workers_day(5)).to eq("-")
+    expect(request1.workers_day(6)).to eq("-")
+    request1.days[0].worker_primary = "A"
+    request1.days[0].worker_primary = "sW"
+    request1.days[4].worker_primary = "R"
+    expect(request1.workers_day(0)).to eq("A, sW")
+    expect(request1.workers_day(4)).to eq("R")
+
+  end
+
+  scenario "Can accurately parse a weeks worth of shift data into a string" do
+    expect(request1.weekly_shift).to eq("0100 -\n0200")
+    request1.days[4].end_time = "1100"
+    expect(request1.weekly_shift).to eq("0100 -\n1100")
+    request1.days[6].start_time = "0030"
+    expect(request1.weekly_shift).to eq("0030 -\n1100")
+  end
+
+  scenario "Can accurately parse a weeks worth of single tracking data to a true/false value" do
+    expect(request1.weekly_single_track).to eq(false)
+    request1.days[3].single_track = true
+    expect(request1.weekly_single_track).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of TAW data to a true/false value" do
+    expect(request1.weekly_taw).to eq(false)
+    request1.days[3].taw = true
+    expect(request1.weekly_taw).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of Form B data to a true/false value" do
+    expect(request1.weekly_form_b).to eq(false)
+    request1.days[3].form_b = true
+    expect(request1.weekly_form_b).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of Form C to a true/false value" do
+    expect(request1.weekly_form_c).to eq(false)
+    request1.days[3].form_c = true
+    expect(request1.weekly_form_c).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of T&T data to a true/false value" do
+    expect(request1.weekly_track_and_time).to eq(false)
+    request1.days[3].track_and_time = true
+    expect(request1.weekly_track_and_time).to eq(true)
+  end
+
+  scenario "Can accurately parse a weeks worth of Inacc Track data to a true/false value" do
+    expect(request1.weekly_inacc_track).to eq(false)
+    request1.days[3].inacc_track = true
+    expect(request1.weekly_inacc_track).to eq(true)
+  end
+
 
 end
