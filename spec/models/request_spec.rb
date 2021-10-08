@@ -86,9 +86,9 @@ feature 'requests' do
   end
 
   scenario "Can accurately parse a weeks worth of MT4 to a true/false value" do
-    expect(request1.weekly_mr4).to eq(false)
-    request1.days[3].mr4 = true
-    expect(request1.weekly_mr4).to eq(true)
+    expect(request1.weekly_mt4).to eq(false)
+    request1.days[3].mt4 = true
+    expect(request1.weekly_mt4).to eq(true)
   end
 
   scenario "Can accurately parse a weeks worth of the Other field to a true/false value" do
@@ -105,9 +105,9 @@ feature 'requests' do
     expect(request1.workers_day(4)).to eq("-")
     expect(request1.workers_day(5)).to eq("-")
     expect(request1.workers_day(6)).to eq("-")
-    request1.days[0].worker_primary = "A"
-    request1.days[0].worker_primary = "sW"
-    request1.days[4].worker_primary = "R"
+    request1.mon.worker_primary = "A"
+    request1.mon.worker_secondary1 = "sW"
+    request1.fri.worker_primary = "R"
     expect(request1.workers_day(0)).to eq("A, sW")
     expect(request1.workers_day(4)).to eq("R")
 

@@ -11,10 +11,10 @@ class CreateDays < ActiveRecord::Migration[5.2]
       t.integer :cp2, default: 1
       t.decimal :mp1, default: 0.0
       t.decimal :mp2, default: 0.0
-      t.boolean :MT1, default: false
-      t.boolean :MT2, default: false
-      t.boolean :MT3, default: false
-      t.boolean :MT4, default: false
+      t.boolean :mt1, default: false
+      t.boolean :mt2, default: false
+      t.boolean :mt3, default: false
+      t.boolean :mt4, default: false
       t.boolean :other, default: false
       t.boolean :taw, default: false
       t.boolean :form_b, default: false

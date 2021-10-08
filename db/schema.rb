@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_08_174502) do
+ActiveRecord::Schema.define(version: 2021_10_08_211749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 2021_10_08_174502) do
     t.integer "cp2", default: 1
     t.decimal "mp1", default: "0.0"
     t.decimal "mp2", default: "0.0"
-    t.boolean "MT1", default: false
-    t.boolean "MT2", default: false
-    t.boolean "MT3", default: false
-    t.boolean "MT4", default: false
+    t.boolean "mt1", default: false
+    t.boolean "mt2", default: false
+    t.boolean "mt3", default: false
+    t.boolean "mt4", default: false
     t.boolean "other", default: false
     t.boolean "taw", default: false
     t.boolean "form_b", default: false
@@ -54,6 +54,10 @@ ActiveRecord::Schema.define(version: 2021_10_08_174502) do
     t.string "approval_group_3", default: "pending"
     t.string "approval_group_4", default: "pending"
     t.integer "num_in_week", null: false
+    t.string "worker_secondary6", default: "-"
+    t.string "worker_secondary7", default: "-"
+    t.string "worker_secondary8", default: "-"
+    t.string "worker_secondary9", default: "-"
     t.index ["request_id"], name: "index_days_on_request_id"
   end
 
