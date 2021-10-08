@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_041348) do
+ActiveRecord::Schema.define(version: 2021_10_08_174502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,21 @@ ActiveRecord::Schema.define(version: 2021_10_04_041348) do
     t.bigint "week_id"
     t.string "contractor"
     t.string "status", default: "pending"
+    t.string "project", null: false
+    t.string "work_directive", null: false
+    t.string "title", null: false
+    t.string "description", null: false
+    t.string "sswps", null: false
+    t.string "change_notices", null: false
+    t.boolean "rwp", default: false, null: false
+    t.boolean "ocs", default: false, null: false
+    t.boolean "disturb", default: false, null: false
+    t.boolean "rrm", default: false, null: false
+    t.boolean "foul", default: false, null: false
+    t.boolean "crossings", default: false, null: false
+    t.boolean "underground", default: false, null: false
+    t.boolean "flagging", default: false, null: false
+    t.string "requestor_name", null: false
     t.index ["user_id"], name: "index_requests_on_user_id"
     t.index ["week_id"], name: "index_requests_on_week_id"
   end

@@ -67,6 +67,43 @@
           <td> <%= r.status? %></td>
           <td><%= linecount %></td>
           <% linecount += 1 %>
+          <td><%= r.project %><br><%= r.work_directive %></td>
+          <td><%= r.contractor %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><p class="request_title"><%= r.title %></p><%= r.description %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%=  %></td>
+          <td><%= r.sswps %></td>
+          <td><%= r.change_notices %></td>
+          <td><%= r.rwp %></td>
+          <td><%= r.ocs %></td>
+          <td><%= r.disturb %></td>
+          <td><%= r.rrm %></td>
+          <td><%= r.foul %></td>
+          <td><%= r.crossings %></td>
+          <td><%= r.underground %></td>
+          <td><%= r.flagging %></td>
+          <td><%= r.created_at %></td>
+          <td><%= r.updated_at %></td>
+          <td><%= r.user.name %></td>
         </tr>
       <% end %>
   </tbody>
