@@ -205,4 +205,37 @@ class Request < ApplicationRecord
     return value
   end
 
+  def approval_status_group(groupnum)
+    status = "approved"
+    self.days.each do |day|
+      case groupnum
+      when 1
+          if day.approval_group_1 == "pending" && status == "approved"
+            status = "pending"
+          elsif day.approval_group_1 == "rejected"
+            status = "rejected"
+          end
+      when 2
+        if day.approval_group_2 == "pending" && status == "approved"
+          status = "pending"
+        elsif day.approval_group_2 == "rejected"
+          status = "rejected"
+        end
+      when 3
+        if day.approval_group_3 == "pending" && status == "approved"
+          status = "pending"
+        elsif day.approval_group_3 == "rejected"
+          status = "rejected"
+        end
+      when 4
+        if day.approval_group_4 == "pending" && status == "approved"
+          status = "pending"
+        elsif day.approval_group_4 == "rejected"
+          status = "rejected"
+        end
+      end
+    end
+    return status
+  end
+
 end
