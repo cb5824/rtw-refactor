@@ -15,6 +15,9 @@ FactoryBot.define do
       [0, 1, 2, 3, 4, 5, 6].each do |i|
         FactoryBot.create(:day, request: request, num_in_week: i)
       end
+      request.days.each_with_index do |day, i|
+        day.num_in_week = i
+      end
     end
   end
 end

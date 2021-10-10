@@ -33,20 +33,28 @@ class Request < ApplicationRecord
 
   def status?
     status = "approved"
+    cancelled = true
     self.days.each do |day|
-      if day.status? == "pending" && status == "approved"
+      if day.status? == "pending" && status == "approved" && day.cancelled == false && day.populated == true
         status = "pending"
-      elsif day.status? == "rejected"
+      elsif day.status? == "rejected" && day.cancelled == false && day.populated == true
         status = "rejected"
       end
+      if day.populated == true && day.cancelled == false
+        cancelled = false
+      end
     end
-    return status
+    if cancelled == true
+      return "cancelled"
+    else
+      return status
+    end
   end
 
   def weekly_mp
     all_mps = []
     self.days.each do |day|
-      if day.cancelled == false
+      if day.cancelled == false && day.populated == true
         all_mps << day.mp1
         all_mps << day.mp2
       end
@@ -57,7 +65,7 @@ class Request < ApplicationRecord
   def weekly_cp
     all_cps = []
     self.days.each do |day|
-      if day.cancelled == false
+      if day.cancelled == false && day.populated == true
         all_cps << day.cp1
         all_cps << day.cp2
       end
@@ -68,7 +76,7 @@ class Request < ApplicationRecord
   def weekly_mt1
     value = false
     self.days.each do |day|
-      if day.mt1 == true
+      if day.mt1 == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -78,7 +86,7 @@ class Request < ApplicationRecord
   def weekly_mt2
     value = false
     self.days.each do |day|
-      if day.mt2 == true
+      if day.mt2 == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -88,7 +96,7 @@ class Request < ApplicationRecord
   def weekly_mt3
     value = false
     self.days.each do |day|
-      if day.mt3 == true
+      if day.mt3 == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -98,7 +106,7 @@ class Request < ApplicationRecord
   def weekly_mt4
     value = false
     self.days.each do |day|
-      if day.mt4 == true
+      if day.mt4 == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -108,7 +116,7 @@ class Request < ApplicationRecord
   def weekly_other
     value = false
     self.days.each do |day|
-      if day.other == true
+      if day.other == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -117,10 +125,14 @@ class Request < ApplicationRecord
 
   def workers_day(daynum)
     day = self.days.find {|d| d.num_in_week == daynum}
-    value = day.worker_primary
-    [day.worker_secondary1, day.worker_secondary2, day.worker_secondary3, day.worker_secondary4, day.worker_secondary5, day.worker_secondary6, day.worker_secondary7, day.worker_secondary8, day.worker_secondary9,].each do |worker|
-      if worker != "-"
-        value += ", #{worker}"
+    if day.populated == false
+      value = "-"
+    else
+      value = day.worker_primary
+      [day.worker_secondary1, day.worker_secondary2, day.worker_secondary3, day.worker_secondary4, day.worker_secondary5, day.worker_secondary6, day.worker_secondary7, day.worker_secondary8, day.worker_secondary9,].each do |worker|
+        if worker != "-"
+          value += ", #{worker}"
+        end
       end
     end
     return value
@@ -129,7 +141,7 @@ class Request < ApplicationRecord
   def weekly_shift
     all_times = []
     self.days.each do |day|
-      if day.cancelled == false
+      if day.cancelled == false && day.populated == true
         all_times << (day.start_time.delete ":").to_i
         all_times << (day.end_time.delete ":").to_i
       end
@@ -148,7 +160,7 @@ class Request < ApplicationRecord
   def weekly_single_track
     value = false
     self.days.each do |day|
-      if day.single_track == true
+      if day.single_track == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -158,7 +170,7 @@ class Request < ApplicationRecord
   def weekly_taw
     value = false
     self.days.each do |day|
-      if day.taw == true
+      if day.taw == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -168,7 +180,7 @@ class Request < ApplicationRecord
   def weekly_form_b
     value = false
     self.days.each do |day|
-      if day.form_b == true
+      if day.form_b == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -178,7 +190,7 @@ class Request < ApplicationRecord
   def weekly_form_c
     value = false
     self.days.each do |day|
-      if day.form_c == true
+      if day.form_c == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -188,7 +200,7 @@ class Request < ApplicationRecord
   def weekly_track_and_time
     value = false
     self.days.each do |day|
-      if day.track_and_time == true
+      if day.track_and_time == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -198,7 +210,7 @@ class Request < ApplicationRecord
   def weekly_inacc_track
     value = false
     self.days.each do |day|
-      if day.inacc_track == true
+      if day.inacc_track == true && day.cancelled == false && day.populated == true
         value = true
       end
     end
@@ -208,30 +220,32 @@ class Request < ApplicationRecord
   def approval_status_group(groupnum)
     status = "approved"
     self.days.each do |day|
-      case groupnum
-      when 1
-          if day.approval_group_1 == "pending" && status == "approved"
+      if day.cancelled == false && day.populated == true
+        case groupnum
+        when 1
+            if day.approval_group_1 == "pending" && status == "approved"
+              status = "pending"
+            elsif day.approval_group_1 == "rejected"
+              status = "rejected"
+            end
+        when 2
+          if day.approval_group_2 == "pending" && status == "approved"
             status = "pending"
-          elsif day.approval_group_1 == "rejected"
+          elsif day.approval_group_2 == "rejected"
             status = "rejected"
           end
-      when 2
-        if day.approval_group_2 == "pending" && status == "approved"
-          status = "pending"
-        elsif day.approval_group_2 == "rejected"
-          status = "rejected"
-        end
-      when 3
-        if day.approval_group_3 == "pending" && status == "approved"
-          status = "pending"
-        elsif day.approval_group_3 == "rejected"
-          status = "rejected"
-        end
-      when 4
-        if day.approval_group_4 == "pending" && status == "approved"
-          status = "pending"
-        elsif day.approval_group_4 == "rejected"
-          status = "rejected"
+        when 3
+          if day.approval_group_3 == "pending" && status == "approved"
+            status = "pending"
+          elsif day.approval_group_3 == "rejected"
+            status = "rejected"
+          end
+        when 4
+          if day.approval_group_4 == "pending" && status == "approved"
+            status = "pending"
+          elsif day.approval_group_4 == "rejected"
+            status = "rejected"
+          end
         end
       end
     end
