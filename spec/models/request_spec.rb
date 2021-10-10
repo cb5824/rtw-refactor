@@ -157,5 +157,18 @@ feature 'requests' do
     expect(request1.weekly_inacc_track).to eq(true)
   end
 
+  scenario "Can parse daily approval statuses for each approval group" do
+    for i in 0..6 do
+      request1.days[i].approval_group_1 = "pending"
+    end
+    expect(request1.approval_status_group(1)).to eq("pending")
+    request1.days[3].approval_group_1 = "rejected"
+    expect(request1.approval_status_group(1)).to eq("rejected")
+    for i in 0..6 do
+      request1.days[i].approval_group_1 = "approved"
+    end
+    expect(request1.approval_status_group(1)).to eq("approved")
+  end
+
 
 end
