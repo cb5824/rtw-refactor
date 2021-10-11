@@ -17,7 +17,21 @@ FactoryBot.define do
       end
       request.days.each_with_index do |day, i|
         day.num_in_week = i
+        day.save
       end
+      [0,2,4].each do |i|
+        request.days[i].populated = true
+        request.days[i].start_time = "01:00"
+        request.days[i].end_time = "03:00"
+        request.days[i].cp2 = 4
+        request.days[i].mt1 = "1.0"
+        request.days[i].mt2 = "2.0"
+        request.days[i].worker_primary = "A"
+        request.days[i].worker_secondary1 = "sW"
+        request.days[i].worker_secondary2 = "T"
+        request.days[i].save
+      end
+
     end
   end
 end

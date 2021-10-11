@@ -105,6 +105,9 @@ feature 'requests' do
   end
 
   scenario "Can accurately parse a weeks worth of MT1 to a true/false value" do
+    request1.days.each do |day|
+      day.mt1 = false
+    end
     expect(request1.weekly_mt1).to eq(false)
 
     # check cancelled and non populated days
@@ -117,6 +120,9 @@ feature 'requests' do
   end
 
   scenario "Can accurately parse a weeks worth of MT2 to a true/false value" do
+    request1.days.each do |day|
+      day.mt2 = false
+    end
     expect(request1.weekly_mt2).to eq(false)
     # check cancelled and non populated days
     request1.days[5].mt2 = true
@@ -161,6 +167,11 @@ feature 'requests' do
   end
 
   scenario "Can accurately parse each day's worker allocation into a string" do
+    request1.days.each do |day|
+      day.worker_primary = "-"
+      day.worker_secondary1 = "-"
+      day.worker_secondary2 = "-"
+    end
     expect(request1.workers_day(0)).to eq("-")
     expect(request1.workers_day(1)).to eq("-")
     expect(request1.workers_day(2)).to eq("-")
